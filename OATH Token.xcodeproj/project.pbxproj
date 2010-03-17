@@ -1,0 +1,299 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D3623260D0F684500981E51 /* OATH_TokenAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* OATH_TokenAppDelegate.m */; };
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		21CEABCD1151888E00508BF2 /* EditTokenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CEABC41151888E00508BF2 /* EditTokenViewController.m */; };
+		21CEABCE1151888E00508BF2 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CEABC61151888E00508BF2 /* MainViewController.m */; };
+		21CEABCF1151888E00508BF2 /* NSData+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CEABC81151888E00508BF2 /* NSData+Hex.m */; };
+		21CEABD01151888E00508BF2 /* NSString+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CEABCA1151888E00508BF2 /* NSString+Hex.m */; };
+		21CEABD11151888E00508BF2 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CEABCC1151888E00508BF2 /* Token.m */; };
+		21CEABDB115188D400508BF2 /* blueButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 21CEABD4115188D400508BF2 /* blueButton.png */; };
+		21CEABDC115188D400508BF2 /* EditTokenView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21CEABD5115188D400508BF2 /* EditTokenView.xib */; };
+		21CEABDD115188D400508BF2 /* OATH_Token.png in Resources */ = {isa = PBXBuildFile; fileRef = 21CEABD6115188D400508BF2 /* OATH_Token.png */; };
+		21CEABDE115188D400508BF2 /* HOTP.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CEABD8115188D400508BF2 /* HOTP.m */; };
+		21CEABDF115188D400508BF2 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21CEABD9115188D400508BF2 /* MainView.xib */; };
+		21CEABE0115188D400508BF2 /* whiteButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 21CEABDA115188D400508BF2 /* whiteButton.png */; };
+		21CEABE61151890400508BF2 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21CEABE51151890400508BF2 /* MainWindow.xib */; };
+		21CEABEA1151896600508BF2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21CEABE91151896600508BF2 /* Security.framework */; };
+		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* OATH_TokenAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OATH_TokenAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* OATH_TokenAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OATH_TokenAppDelegate.m; sourceTree = "<group>"; };
+		1D6058910D05DD3D006BFB54 /* OATH Token.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OATH Token.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		21CEABC31151888E00508BF2 /* EditTokenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTokenViewController.h; sourceTree = "<group>"; };
+		21CEABC41151888E00508BF2 /* EditTokenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTokenViewController.m; sourceTree = "<group>"; };
+		21CEABC51151888E00508BF2 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		21CEABC61151888E00508BF2 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		21CEABC71151888E00508BF2 /* NSData+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Hex.h"; sourceTree = "<group>"; };
+		21CEABC81151888E00508BF2 /* NSData+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Hex.m"; sourceTree = "<group>"; };
+		21CEABC91151888E00508BF2 /* NSString+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Hex.h"; sourceTree = "<group>"; };
+		21CEABCA1151888E00508BF2 /* NSString+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Hex.m"; sourceTree = "<group>"; };
+		21CEABCB1151888E00508BF2 /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
+		21CEABCC1151888E00508BF2 /* Token.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Token.m; sourceTree = "<group>"; };
+		21CEABD4115188D400508BF2 /* blueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blueButton.png; path = Classes/blueButton.png; sourceTree = "<group>"; };
+		21CEABD5115188D400508BF2 /* EditTokenView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = EditTokenView.xib; path = Classes/EditTokenView.xib; sourceTree = "<group>"; };
+		21CEABD6115188D400508BF2 /* OATH_Token.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OATH_Token.png; path = Classes/OATH_Token.png; sourceTree = "<group>"; };
+		21CEABD7115188D400508BF2 /* HOTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HOTP.h; sourceTree = "<group>"; };
+		21CEABD8115188D400508BF2 /* HOTP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HOTP.m; sourceTree = "<group>"; };
+		21CEABD9115188D400508BF2 /* MainView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainView.xib; path = Classes/MainView.xib; sourceTree = "<group>"; };
+		21CEABDA115188D400508BF2 /* whiteButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = whiteButton.png; path = Classes/whiteButton.png; sourceTree = "<group>"; };
+		21CEABE51151890400508BF2 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		21CEABE91151896600508BF2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* OATH_Token_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OATH_Token_Prefix.pch; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* OATH_Token-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "OATH_Token-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
+				21CEABEA1151896600508BF2 /* Security.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				1D3623240D0F684500981E51 /* OATH_TokenAppDelegate.h */,
+				1D3623250D0F684500981E51 /* OATH_TokenAppDelegate.m */,
+				21CEABD7115188D400508BF2 /* HOTP.h */,
+				21CEABD8115188D400508BF2 /* HOTP.m */,
+				21CEABC31151888E00508BF2 /* EditTokenViewController.h */,
+				21CEABC41151888E00508BF2 /* EditTokenViewController.m */,
+				21CEABC51151888E00508BF2 /* MainViewController.h */,
+				21CEABC61151888E00508BF2 /* MainViewController.m */,
+				21CEABC71151888E00508BF2 /* NSData+Hex.h */,
+				21CEABC81151888E00508BF2 /* NSData+Hex.m */,
+				21CEABC91151888E00508BF2 /* NSString+Hex.h */,
+				21CEABCA1151888E00508BF2 /* NSString+Hex.m */,
+				21CEABCB1151888E00508BF2 /* Token.h */,
+				21CEABCC1151888E00508BF2 /* Token.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* OATH Token.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32CA4F630368D1EE00C91783 /* OATH_Token_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				21CEABE51151890400508BF2 /* MainWindow.xib */,
+				21CEABD9115188D400508BF2 /* MainView.xib */,
+				21CEABD5115188D400508BF2 /* EditTokenView.xib */,
+				21CEABD6115188D400508BF2 /* OATH_Token.png */,
+				21CEABD4115188D400508BF2 /* blueButton.png */,
+				21CEABDA115188D400508BF2 /* whiteButton.png */,
+				8D1107310486CEB800E47090 /* OATH_Token-Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				21CEABE91151896600508BF2 /* Security.framework */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* OATH Token */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "OATH Token" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "OATH Token";
+			productName = "OATH Token";
+			productReference = 1D6058910D05DD3D006BFB54 /* OATH Token.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "OATH Token" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* OATH Token */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21CEABDB115188D400508BF2 /* blueButton.png in Resources */,
+				21CEABDC115188D400508BF2 /* EditTokenView.xib in Resources */,
+				21CEABDD115188D400508BF2 /* OATH_Token.png in Resources */,
+				21CEABDF115188D400508BF2 /* MainView.xib in Resources */,
+				21CEABE0115188D400508BF2 /* whiteButton.png in Resources */,
+				21CEABE61151890400508BF2 /* MainWindow.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D3623260D0F684500981E51 /* OATH_TokenAppDelegate.m in Sources */,
+				21CEABCD1151888E00508BF2 /* EditTokenViewController.m in Sources */,
+				21CEABCE1151888E00508BF2 /* MainViewController.m in Sources */,
+				21CEABCF1151888E00508BF2 /* NSData+Hex.m in Sources */,
+				21CEABD01151888E00508BF2 /* NSString+Hex.m in Sources */,
+				21CEABD11151888E00508BF2 /* Token.m in Sources */,
+				21CEABDE115188D400508BF2 /* HOTP.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = OATH_Token_Prefix.pch;
+				INFOPLIST_FILE = "OATH_Token-Info.plist";
+				PRODUCT_NAME = "OATH Token";
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = OATH_Token_Prefix.pch;
+				INFOPLIST_FILE = "OATH_Token-Info.plist";
+				PRODUCT_NAME = "OATH Token";
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos3.1.3;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos3.1.3;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "OATH Token" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "OATH Token" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

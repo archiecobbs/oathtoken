@@ -1,0 +1,43 @@
+
+/*
+ * OATH Token - HOTP/OATH one-time password token for iPhone
+ *
+ * Copyright 2010 Archie L. Cobbs <archie@dellroad.org>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * $Id$
+ */
+
+#import <Foundation/Foundation.h>
+#import <CommonCrypto/CommonHMAC.h>
+
+@interface HOTP : NSObject {
+    NSData *key;
+    NSUInteger counter;
+    int numDigits;
+    NSString *dec;
+    NSString *hex;
+}
+
+@property (nonatomic, retain) NSData *key;
+@property (nonatomic) NSUInteger counter;
+@property (nonatomic) int numDigits;
+@property (nonatomic, retain) NSString *dec;
+@property (nonatomic, retain) NSString *hex;
+
++ (HOTP *)hotpWithKey:(NSData *)key counter:(NSUInteger)counter numDigits:(int)digits;
+- (void)computePassword;
+
+@end
+
