@@ -20,10 +20,14 @@
  */
 
 #import "MainViewController.h"
+#import "EditTokenViewController.h"
+#import "InfoViewController.h"
 #import "Token.h"
 
-#define MAX_EVENT_PASSWORD_DISPLAY  60.0        // display event-based passwords for 60 seconds
-#define LABEL_FADE_FRACTION         0.025       // fade-in/fade-out fraction
+#define TOKENS_FILE                 @"tokens.plist" // file for stored tokens
+#define MAX_EVENT_PASSWORD_DISPLAY  30.0            // display event-based passwords for this long
+#define LABEL_FADE_TIME             0.666           // fade-in/fade-out time
+#define TIMER_INTERVAL              0.050           // animation timer interval
 
 @implementation MainViewController
 
@@ -35,7 +39,7 @@
 @synthesize passwordLabel;
 @synthesize progressBar;
 @synthesize timer;
-@synthesize lastProgress;
+@synthesize lastElapsed;
 
 #pragma mark UIViewController methods
 
@@ -59,7 +63,7 @@
 	self.navigationItem.rightBarButtonItem = addButton;
     NSArray *dirs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *dir = [dirs objectAtIndex:0];
-    self.tokenFile = [[[NSString alloc] initWithString:[dir stringByAppendingPathComponent:@"tokens.plist"]] autorelease];
+    self.tokenFile = [dir stringByAppendingPathComponent:TOKENS_FILE];
     self.tokens = [NSArray array];
     [self loadTokens];
     [self updatePasswordDisplay];
@@ -102,6 +106,13 @@
     [self recalculatePassword];
     [self updatePasswordDisplay];
     [self startUpdates];
+}
+
+- (IBAction)showInfo:(id)sender {
+    InfoViewController *info = [[[InfoViewController alloc] initWithNibName:@"InfoView" bundle:nil] autorelease];
+    info.mainViewController = self;
+    info.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentModalViewController:info animated:YES];    
 }
 
 #pragma mark Helper methods
@@ -159,7 +170,7 @@
 // Start update timer
 - (void)startUpdates {
     [self stopUpdates];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timerUpdate:) userInfo:nil repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(timerUpdate:) userInfo:nil repeats:YES];
 }
 
 // Stop update timer
@@ -182,39 +193,43 @@
         [self clearPasswordDisplay];
         return;
     }
-    self.generateButton.hidden = token.timeBased;
     NSDate *now = [NSDate date];
     BOOL showIt = NO;
-    double progress;
+    double period;
+    double elapsed;
     if (token.timeBased) {
         showIt = YES;
+        period = token.interval;
         u_long secs = (u_long)[now timeIntervalSince1970];
         double frac = [now timeIntervalSince1970] - secs;
-        double period = (double)(secs % token.interval) + frac;
-        progress = period / token.interval;
-        if (progress < self.lastProgress)
+        elapsed = (double)(secs % token.interval) + frac;
+        if (elapsed < self.lastElapsed)
             [self recalculatePassword];
-        self.lastProgress = progress;
+        self.lastElapsed = elapsed;
+        self.generateButton.hidden = YES;
+    } else if (token.lastEvent != nil) {
+        elapsed = [now timeIntervalSinceDate:token.lastEvent];
+        period = MAX_EVENT_PASSWORD_DISPLAY;
+        showIt = elapsed <= period;
+        self.generateButton.hidden = showIt;
     } else {
-        NSTimeInterval elapsed = [now timeIntervalSinceDate:token.lastEvent];
-        if ((showIt = (elapsed <= MAX_EVENT_PASSWORD_DISPLAY)))
-            progress = elapsed / MAX_EVENT_PASSWORD_DISPLAY;
-        else
-            [self stopUpdates];
+        showIt = NO;
+        self.generateButton.hidden = NO;
     }
 
     // Display password and progress bar as needed
     self.progressBar.hidden = !showIt;
     self.passwordLabel.hidden = !showIt;
     if (showIt) {
-        self.progressBar.progress = progress;
-        if (progress < LABEL_FADE_FRACTION)
-            self.passwordLabel.alpha = progress / LABEL_FADE_FRACTION;
-        else if (progress > 1.0 - LABEL_FADE_FRACTION)
-            self.passwordLabel.alpha = (1.0 - progress) / LABEL_FADE_FRACTION;
+        self.progressBar.progress = elapsed / period;
+        if (elapsed < LABEL_FADE_TIME)
+            self.passwordLabel.alpha = elapsed / LABEL_FADE_TIME;
+        else if (elapsed > period - LABEL_FADE_TIME)
+            self.passwordLabel.alpha = (period - elapsed) / LABEL_FADE_TIME;
         else
             self.passwordLabel.alpha = 1.0;
-    }
+    } else
+        [self stopUpdates];
 }
 
 // (Re)calculate the current password
@@ -226,17 +241,24 @@
 }
 
 // Invoked when editing a new or existing token has finished
-- (void)finishedEditing:(Token *)token tokenIndex:(int)tokenIndex commit:(BOOL)commit {
+- (void)finishedEditing:(Token *)token tokenIndex:(int)tokenIndex commit:(BOOL)commit reset:(BOOL)reset {
     if (commit) {
-        if (tokenIndex == -1)
+        BOOL added = tokenIndex == -1;
+        if (added)
             tokenIndex = [self.tokens count];
         else
             [self.tokens removeObjectAtIndex:tokenIndex];
         [self.tokens insertObject:token atIndex:tokenIndex];
         [self saveTokens];
-        [self.tokenTable reloadData];
-        [self clearPasswordDisplay];
-        [self stopUpdates];
+        NSArray *indexPaths = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:tokenIndex inSection:0]];
+        if (added)
+            [self.tokenTable insertRowsAtIndexPaths:indexPaths withRowAnimation:NO];
+        else
+            [self.tokenTable reloadRowsAtIndexPaths:indexPaths withRowAnimation:NO];
+        if (reset) {
+            [self clearPasswordDisplay];
+            [self stopUpdates];
+        }
     }
     [self updatePasswordDisplay];
     [self dismissModalViewControllerAnimated:YES];
@@ -244,6 +266,11 @@
         [self startUpdates];
 }
 
+// Invoked when info page "done" button pressed
+- (void)finishedInfo {
+    [self dismissModalViewControllerAnimated:YES];    
+}
+     
 #pragma mark UITableViewDataSource methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -299,7 +326,7 @@
     NSUInteger row = [indexPath row];
     EditTokenViewController *edit = [[[EditTokenViewController alloc] initWithNibName:@"EditTokenView" bundle:nil] autorelease];
     edit.mainViewController = self;
-    edit.token = [Token createFromToken:[self.tokens objectAtIndex:row]];
+    edit.token = [[[self.tokens objectAtIndex:row] copy] autorelease];
     edit.tokenIndex = row;
     edit.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self presentModalViewController:edit animated:YES];
@@ -314,6 +341,7 @@
     add.tokenIndex = -1;
     add.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentModalViewController:add animated:YES];
+    [add.name becomeFirstResponder];
 }
 
 @end

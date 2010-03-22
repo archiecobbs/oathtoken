@@ -24,7 +24,6 @@
 @class EditTokenViewController;
 
 #import "Token.h"
-#import "EditTokenViewController.h"
 
 @interface MainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
 
@@ -40,7 +39,7 @@
     
     // Timer
     NSTimer *timer;
-    double lastProgress;
+    double lastElapsed;
 }
 
 // Properties
@@ -51,7 +50,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *passwordLabel;
 @property (nonatomic, retain) IBOutlet UIProgressView *progressBar;
 @property (nonatomic, retain) NSTimer *timer;
-@property (nonatomic) double lastProgress;
+@property (nonatomic) double lastElapsed;
 
 // Methods
 + (void)prettyUpButton:(UIButton *)button;
@@ -64,10 +63,12 @@
 - (void)recalculatePassword;
 - (void)updatePasswordDisplay;
 - (void)clearPasswordDisplay;
-- (void)finishedEditing:(Token *)token tokenIndex:(int)tokenIndex commit:(BOOL)commit;
+- (void)finishedEditing:(Token *)token tokenIndex:(int)tokenIndex commit:(BOOL)commit reset:(BOOL)reset;
+- (void)finishedInfo;
 
 // Actions
 - (IBAction)generatePassword:(id)sender;
 - (IBAction)addToken:(id)sender;
+- (IBAction)showInfo:(id)sender;
 
 @end

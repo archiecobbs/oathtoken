@@ -30,6 +30,7 @@
 
 @interface EditTokenViewController : UIViewController {
     Token *token;
+    Token *originalToken;
     int tokenIndex;
     MainViewController *mainViewController;
     UINavigationItem *navItem;
@@ -48,6 +49,7 @@
 }
 
 @property (nonatomic, retain) Token *token;
+@property (nonatomic, retain) Token *originalToken;
 @property (nonatomic) int tokenIndex;
 @property (nonatomic, retain) MainViewController *mainViewController;
 @property (nonatomic, retain) IBOutlet UINavigationItem *navItem;
@@ -67,7 +69,7 @@
 - (IBAction)typeChanged;
 - (IBAction)generateRandomKey;
 - (IBAction)stuffChanged:(id)sender;
-- (BOOL)validate;
+- (BOOL)validate:(BOOL *)resetp;
 - (IBAction)cancelEdit:(id)sender;
 - (IBAction)commitEdit:(id)sender;
 - (void)updateHiddenStuff;

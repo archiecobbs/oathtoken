@@ -21,7 +21,6 @@
 
 #import "NSString+Hex.h"
 
-
 @implementation NSString (Hex)
 
 - (NSString *)validateHex {

@@ -11,6 +11,8 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		21B8371711554E830086D6FA /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B8371511554E830086D6FA /* InfoViewController.m */; };
+		21B8371811554E830086D6FA /* InfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21B8371611554E830086D6FA /* InfoView.xib */; };
 		21CEABCD1151888E00508BF2 /* EditTokenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CEABC41151888E00508BF2 /* EditTokenViewController.m */; };
 		21CEABCE1151888E00508BF2 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CEABC61151888E00508BF2 /* MainViewController.m */; };
 		21CEABCF1151888E00508BF2 /* NSData+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CEABC81151888E00508BF2 /* NSData+Hex.m */; };
@@ -33,6 +35,9 @@
 		1D3623250D0F684500981E51 /* OATH_TokenAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OATH_TokenAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* OATH Token.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OATH Token.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		21B8371411554E830086D6FA /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoViewController.h; path = ../InfoViewController.h; sourceTree = "<group>"; };
+		21B8371511554E830086D6FA /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoViewController.m; path = ../InfoViewController.m; sourceTree = "<group>"; };
+		21B8371611554E830086D6FA /* InfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoView.xib; sourceTree = "<group>"; };
 		21CEABC31151888E00508BF2 /* EditTokenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTokenViewController.h; sourceTree = "<group>"; };
 		21CEABC41151888E00508BF2 /* EditTokenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTokenViewController.m; sourceTree = "<group>"; };
 		21CEABC51151888E00508BF2 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -80,6 +85,8 @@
 				1D3623250D0F684500981E51 /* OATH_TokenAppDelegate.m */,
 				21CEABD7115188D400508BF2 /* HOTP.h */,
 				21CEABD8115188D400508BF2 /* HOTP.m */,
+				21B8371411554E830086D6FA /* InfoViewController.h */,
+				21B8371511554E830086D6FA /* InfoViewController.m */,
 				21CEABC31151888E00508BF2 /* EditTokenViewController.h */,
 				21CEABC41151888E00508BF2 /* EditTokenViewController.m */,
 				21CEABC51151888E00508BF2 /* MainViewController.h */,
@@ -127,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				21CEABE51151890400508BF2 /* MainWindow.xib */,
+				21B8371611554E830086D6FA /* InfoView.xib */,
 				21CEABD9115188D400508BF2 /* MainView.xib */,
 				21CEABD5115188D400508BF2 /* EditTokenView.xib */,
 				21CEABD6115188D400508BF2 /* OATH_Token.png */,
@@ -196,6 +204,7 @@
 				21CEABDF115188D400508BF2 /* MainView.xib in Resources */,
 				21CEABE0115188D400508BF2 /* whiteButton.png in Resources */,
 				21CEABE61151890400508BF2 /* MainWindow.xib in Resources */,
+				21B8371811554E830086D6FA /* InfoView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +223,7 @@
 				21CEABD01151888E00508BF2 /* NSString+Hex.m in Sources */,
 				21CEABD11151888E00508BF2 /* Token.m in Sources */,
 				21CEABDE115188D400508BF2 /* HOTP.m in Sources */,
+				21B8371711554E830086D6FA /* InfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

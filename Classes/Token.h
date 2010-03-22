@@ -21,7 +21,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Token : NSObject {
+@interface Token : NSObject <NSCopying> {
     NSString *name;
     NSData *key;
     BOOL timeBased;
@@ -45,7 +45,6 @@
 
 + (Token *)createEmpty;
 + (Token *)createFromDictionary:(NSDictionary *)dict;
-+ (Token *)createFromToken:(Token *)token;
 - (NSDictionary *)toDictionary;
 - (NSString *)generatePassword;
 - (void)advanceCounter;

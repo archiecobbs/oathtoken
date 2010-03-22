@@ -49,13 +49,13 @@
     Token *token = [[[Token alloc] init] autorelease];
     token.name = @"";
     token.key = [NSData data];
-    token.timeBased = YES;
+    token.timeBased = NO;
     token.counter = 0;
     token.interval = 30;
     token.numDigits = 6;
     token.displayHex = NO;
     token.editable = YES;
-    token.lastEvent = [NSDate dateWithTimeIntervalSinceReferenceDate:0.0];
+    token.lastEvent = nil;
     return token;
 }
 
@@ -73,31 +73,32 @@
     return token;
 }
 
-+ (Token *)createFromToken:(Token *)token {
-    Token *copy = [[[Token alloc] init] autorelease];
-    copy.name = token.name;
-    copy.key = token.key;
-    copy.timeBased = token.timeBased;
-    copy.counter = token.counter;
-    copy.interval = token.interval;
-    copy.numDigits = token.numDigits;
-    copy.displayHex = token.displayHex;
-    copy.editable = token.editable;
-    copy.lastEvent = token.lastEvent;
+// NSCopying
+- (id)copyWithZone:(NSZone *)zone {
+    Token *copy = [[[self class] allocWithZone: zone] init];
+    copy.name = [[self.name copyWithZone:zone] autorelease];
+    copy.key = [[self.key copyWithZone:zone] autorelease];
+    copy.timeBased = self.timeBased;
+    copy.counter = self.counter;
+    copy.interval = self.interval;
+    copy.numDigits = self.numDigits;
+    copy.displayHex = self.displayHex;
+    copy.editable = self.editable;
+    copy.lastEvent = self.lastEvent != nil ? [[self.lastEvent copyWithZone:zone] autorelease] : nil;
     return copy;
 }
 
 - (NSDictionary *)toDictionary {
     NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
-                          NAME_KEY, self.name,
-                          KEY_KEY, self.key,
-                          TIME_BASED_KEY, [NSNumber numberWithBool:self.timeBased],
-                          COUNTER_KEY, [NSNumber numberWithInt:self.counter],
-                          INTERVAL_KEY, [NSNumber numberWithInt:self.interval],
-                          NUM_DIGITS_KEY, [NSNumber numberWithInt:self.numDigits],
-                          DISPLAY_HEX_KEY, [NSNumber numberWithBool:self.displayHex],
-                          EDITABLE_KEY, [NSNumber numberWithBool:self.editable],
-                          LAST_EVENT_KEY, self.lastEvent,
+                          self.name, NAME_KEY,
+                          self.key, KEY_KEY,
+                          [NSNumber numberWithBool:self.timeBased], TIME_BASED_KEY,
+                          [NSNumber numberWithInt:self.counter], COUNTER_KEY,
+                          [NSNumber numberWithInt:self.interval], INTERVAL_KEY,
+                          [NSNumber numberWithInt:self.numDigits], NUM_DIGITS_KEY,
+                          [NSNumber numberWithBool:self.displayHex], DISPLAY_HEX_KEY,
+                          [NSNumber numberWithBool:self.editable], EDITABLE_KEY,
+                          self.lastEvent, LAST_EVENT_KEY,
                          nil];
     [dict autorelease];
     return dict;

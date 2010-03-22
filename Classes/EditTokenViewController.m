@@ -27,6 +27,7 @@
 @implementation EditTokenViewController
 
 @synthesize token;
+@synthesize originalToken;
 @synthesize mainViewController;
 @synthesize navItem;
 @synthesize tokenIndex;
@@ -51,6 +52,7 @@
 																  target:self
 																  action:@selector(cancelEdit:)] autorelease];    
 	self.navigationItem.rightBarButtonItem = cancelButton;
+    self.originalToken = [[self.token copy] autorelease];
     [self updateDisplayFromToken];
 }
 
@@ -102,7 +104,7 @@
     [sender resignFirstResponder];
 }
 
-- (BOOL)validate {
+- (BOOL)validate:(BOOL *)resetp {
 
     // Check name
     if ([self.name.text length] == 0) {
@@ -137,7 +139,7 @@
     // Check interval
     NSInteger intervalValue;
     scanner = [NSScanner scannerWithString:self.interval.text];
-    if (![scanner scanInteger:&intervalValue] || intervalValue < 0) {
+    if (![scanner scanInteger:&intervalValue] || intervalValue < 1) {
         if (!self.token.timeBased)
             intervalValue = 30;
         else {
@@ -165,6 +167,17 @@
     self.token.numDigits = digitsValue;
     self.token.displayHex = self.displayHex.on;
     self.token.editable = !self.lockDown.on;
+
+    // Determine if we should reset 'last event' timestamp
+    BOOL reset = ![self.token.key isEqual:self.originalToken.key]
+      || self.token.timeBased != self.originalToken.timeBased
+      || self.token.counter != self.originalToken.counter
+      || self.token.interval != self.originalToken.interval
+      || self.token.numDigits != self.originalToken.numDigits
+      || self.token.displayHex != self.originalToken.displayHex;
+    if (reset)
+        self.token.lastEvent = nil;
+    *resetp = reset;
     
     // Done
     return YES;
@@ -177,16 +190,18 @@
 }
 
 - (IBAction)cancelEdit:(id)sender {
-    [self.mainViewController finishedEditing:self.token tokenIndex:self.tokenIndex commit:NO];
+    [self.mainViewController finishedEditing:self.token tokenIndex:self.tokenIndex commit:NO reset:NO];
 }
 
 - (IBAction)commitEdit:(id)sender {
-    if (![self validate])
+    BOOL reset;
+    if (![self validate:&reset])
         return;
-    [self.mainViewController finishedEditing:self.token tokenIndex:self.tokenIndex commit:YES];
+    [self.mainViewController finishedEditing:self.token tokenIndex:self.tokenIndex commit:YES reset:reset];
 }
 
 - (void)viewDidUnload {
+    self.originalToken = nil;
     self.navItem = nil;
     self.name = nil;
     self.key = nil;
@@ -200,6 +215,7 @@
 
 - (void)dealloc {
     [token release];
+    [originalToken release];
     [mainViewController release];
     [navItem release];
     [name release];
