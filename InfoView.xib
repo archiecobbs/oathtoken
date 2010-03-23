@@ -72,7 +72,7 @@
 					<object class="IBUITextView" id="794863473">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 81}, {280, 241}}</string>
+						<string key="NSFrame">{{20, 90}, {280, 215}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -82,7 +82,7 @@
 						<bool key="IBUICanCancelContentTouches">NO</bool>
 						<bool key="IBUIBouncesZoom">NO</bool>
 						<bool key="IBUIEditable">NO</bool>
-						<string key="IBUIText">OATH Token is a free and open-source software token for two-factor authentication. OATH Token is compatible with RFC 4226 (HOTP/OATH) and is not tied to any proprietary server software. OATH Token supports web-based provisioning and full configurability. Tokens may also be permanently "locked down".</string>
+						<string key="IBUIText">OATH Token is a free and open-source software token for two-factor authentication. OATH Token is compatible with RFC 4226 (HOTP/OATH) and is not tied to any proprietary server software. OATH Token supports web-based provisioning and fully configurable event and time based tokens.</string>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIAutocapitalizationType">2</int>
 						</object>
@@ -113,7 +113,7 @@
 					<object class="IBUILabel" id="94361278">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{118, 52}, {84, 21}}</string>
+						<string key="NSFrame">{{118, 47}, {84, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -203,9 +203,9 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="777221029"/>
-							<reference ref="94361278"/>
 							<reference ref="37987112"/>
 							<reference ref="794863473"/>
+							<reference ref="94361278"/>
 							<reference ref="335147039"/>
 						</object>
 						<reference key="parent" ref="0"/>
