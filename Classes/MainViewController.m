@@ -133,21 +133,13 @@
     
     // Find data file
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *file = nil;
-    if ([fileManager fileExistsAtPath:self.tokenFile] == YES)
-        file = self.tokenFile;
-
-//    if (file == nil)
-//        file = [[NSBundle mainBundle] pathForResource:@"sample-tokens" ofType:@"plist"];
-    
-    // Any file to read?
-    if (file == nil) {
+    if (![fileManager fileExistsAtPath:self.tokenFile]) {
         self.tokens = [NSMutableArray array];
         return;
     }
     
     // Read file
-    NSArray *fileContents = [NSArray arrayWithContentsOfFile:file];
+    NSArray *fileContents = [NSArray arrayWithContentsOfFile:self.tokenFile];
     self.tokens = [NSMutableArray arrayWithCapacity:[fileContents count]];
     for (NSDictionary *dict in fileContents)
         [tokens addObject:[Token createFromDictionary:dict]];
@@ -222,10 +214,10 @@
     self.passwordLabel.hidden = !showIt;
     if (showIt) {
         self.progressBar.progress = elapsed / period;
-        if (elapsed < LABEL_FADE_TIME)
-            self.passwordLabel.alpha = elapsed / LABEL_FADE_TIME;
-        else if (elapsed > period - LABEL_FADE_TIME)
+        if (elapsed > period - LABEL_FADE_TIME)
             self.passwordLabel.alpha = (period - elapsed) / LABEL_FADE_TIME;
+        else if (elapsed < LABEL_FADE_TIME)
+            self.passwordLabel.alpha = elapsed / LABEL_FADE_TIME;
         else
             self.passwordLabel.alpha = 1.0;
     } else
@@ -289,7 +281,7 @@
     if (cell == nil)
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ident] autorelease];
     cell.textLabel.text = token.name;
-    cell.accessoryType = token.editable ? UITableViewCellAccessoryDetailDisclosureButton : UITableViewCellAccessoryNone;
+    cell.accessoryType = !token.lockdown ? UITableViewCellAccessoryDetailDisclosureButton : UITableViewCellAccessoryNone;
     return cell;
 }
 

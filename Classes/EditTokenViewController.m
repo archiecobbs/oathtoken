@@ -22,8 +22,6 @@
 #import "EditTokenViewController.h"
 #import "MainViewController.h"
 
-#define MIN_KEY_BYTES 8
-
 @implementation EditTokenViewController
 
 @synthesize token;
@@ -79,7 +77,7 @@
     self.interval.text = [NSString stringWithFormat:@"%u", self.token.interval];
     self.numDigits.text = [NSString stringWithFormat:@"%u", self.token.numDigits];
     self.displayHex.on = self.token.displayHex;
-    self.lockDown.on = !self.token.editable;
+    self.lockDown.on = self.token.lockdown;
     [self updateHiddenStuff];
 }
 
@@ -104,85 +102,6 @@
     [sender resignFirstResponder];
 }
 
-- (BOOL)validate:(BOOL *)resetp {
-
-    // Check name
-    if ([self.name.text length] == 0) {
-        [self alertError:@"Invalid Name" withMessage:@"The token name must not be empty"];
-        return NO;
-    }
-    
-    // Check key
-    NSString *digits = [self.key.text validateHex];
-    if (digits == nil) {
-        [self alertError:@"Invalid Key" withMessage:@"The key must contain an even number of hexadecimal digits (0-9 and A-F)"];
-        return NO;
-    }
-    int nbytes = [digits length] / 2;
-    if (nbytes < MIN_KEY_BYTES) {
-        [self alertError:@"Key Too Short" withMessage:[NSString stringWithFormat:@"The key must contain at least %d bytes", MIN_KEY_BYTES]];
-        return NO;
-    }
-    
-    // Check counter
-    NSInteger counterValue;
-    NSScanner *scanner = [NSScanner scannerWithString:self.counter.text];
-    if (![scanner scanInteger:&counterValue] || counterValue < 0) {
-        if (self.token.timeBased)
-            counterValue = 0;
-        else {
-            [self alertError:@"Invalid Counter" withMessage:@"The counter must be a non-negative number"];
-            return NO;
-        }
-    }
-    
-    // Check interval
-    NSInteger intervalValue;
-    scanner = [NSScanner scannerWithString:self.interval.text];
-    if (![scanner scanInteger:&intervalValue] || intervalValue < 1) {
-        if (!self.token.timeBased)
-            intervalValue = 30;
-        else {
-            [self alertError:@"Invalid Interval" withMessage:@"The time interval must be a non-negative number"];
-            return NO;        
-        }
-    }
-    
-    // Check # digits
-    NSInteger digitsValue;
-    int minDigits = 4;
-    int maxDigits = self.displayHex.on ? 8 : 10;
-    scanner = [NSScanner scannerWithString:self.numDigits.text];
-    if (![scanner scanInteger:&digitsValue] || digitsValue < minDigits || digitsValue > maxDigits) {
-        [self alertError:@"Invalid Number of Digits" withMessage:
-            [NSString stringWithFormat:@"The number of digits must be a number between %d and %d", minDigits, maxDigits]];
-        return NO;        
-    }
-    
-    // Changes are OK
-    self.token.name = self.name.text;
-    self.token.key = [digits parseHex];
-    self.token.counter = counterValue;
-    self.token.interval = intervalValue;
-    self.token.numDigits = digitsValue;
-    self.token.displayHex = self.displayHex.on;
-    self.token.editable = !self.lockDown.on;
-
-    // Determine if we should reset 'last event' timestamp
-    BOOL reset = ![self.token.key isEqual:self.originalToken.key]
-      || self.token.timeBased != self.originalToken.timeBased
-      || self.token.counter != self.originalToken.counter
-      || self.token.interval != self.originalToken.interval
-      || self.token.numDigits != self.originalToken.numDigits
-      || self.token.displayHex != self.originalToken.displayHex;
-    if (reset)
-        self.token.lastEvent = nil;
-    *resetp = reset;
-    
-    // Done
-    return YES;
-}
-
 - (void)alertError:(NSString *)title withMessage:(NSString *)msg {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Continue Editing" otherButtonTitles:nil];
     [alert show];
@@ -194,9 +113,29 @@
 }
 
 - (IBAction)commitEdit:(id)sender {
-    BOOL reset;
-    if (![self validate:&reset])
+    
+    // Validate fields
+    NSString *errhdr = nil;
+    NSString *errmsg = nil;
+    if (![self.token applyChangesName:self.name.text key:self.key.text timeBased:self.token.timeBased
+                                          counter:self.counter.text interval:self.interval.text numDigits:self.numDigits.text
+                                       displayHex:self.displayHex.on errhdrp:&errhdr errmsgp:&errmsg]) {
+        [self alertError:errhdr withMessage:errmsg];
         return;
+    }
+    self.token.lockdown = self.lockDown.on;
+    
+    // Determine if we should reset 'last event' timestamp
+    BOOL reset = ![self.token.key isEqual:self.originalToken.key]
+    || self.token.timeBased != self.originalToken.timeBased
+    || self.token.counter != self.originalToken.counter
+    || self.token.interval != self.originalToken.interval
+    || self.token.numDigits != self.originalToken.numDigits
+    || self.token.displayHex != self.originalToken.displayHex;
+    if (reset)
+        self.token.lastEvent = nil;
+    
+    // Done
     [self.mainViewController finishedEditing:self.token tokenIndex:self.tokenIndex commit:YES reset:reset];
 }
 

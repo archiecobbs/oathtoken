@@ -2,6 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>oathtoken</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>com.googlecode.oathtoken</string>
+		</dict>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
@@ -11,7 +22,7 @@
 	<key>CFBundleIconFile</key>
 	<string>OATH_Token.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.dellroad.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.googlecode.oathtoken</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

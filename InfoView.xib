@@ -82,7 +82,7 @@
 						<bool key="IBUICanCancelContentTouches">NO</bool>
 						<bool key="IBUIBouncesZoom">NO</bool>
 						<bool key="IBUIEditable">NO</bool>
-						<string key="IBUIText">OATH Token is a free and open-source RFC 4226 (HOTP/OATH) compatible software token for two-factor authentication. OATH Token allows creating your own fully configurable tokens. Tokens may also be "locked down". OATH Token is not tied to any proprietary authentication server software.</string>
+						<string key="IBUIText">OATH Token is a free and open-source RFC 4226 (HOTP/OATH) compatible token for two-factor authentication. OATH Token is not tied to any proprietary server software. OATH Token supports web-based provisioning and full configurability. Tokens may also be permanently "locked down".</string>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIAutocapitalizationType">2</int>
 						</object>
@@ -133,7 +133,7 @@
 					<object class="IBUITextView" id="335147039">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 330}, {280, 75}}</string>
+						<string key="NSFrame">{{20, 320}, {280, 75}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -540,7 +540,7 @@
 			<integer value="3000" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<nil key="IBDocument.LastKnownRelativeProjectPath"/>
+		<string key="IBDocument.LastKnownRelativeProjectPath">OATH Token.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<string key="IBCocoaTouchPluginVersion">3.1</string>
 	</data>

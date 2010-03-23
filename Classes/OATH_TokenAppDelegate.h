@@ -23,13 +23,20 @@
 
 #import "MainViewController.h"
 
-@interface OATH_TokenAppDelegate : NSObject <UIApplicationDelegate> {
+#define ADD_TOKEN_URL_PATH      @"/addToken"
+
+@interface OATH_TokenAppDelegate : NSObject <UIApplicationDelegate, UIAlertViewDelegate> {
     UIWindow *window;
     MainViewController *mainViewController;
+    Token *addToken;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet MainViewController *mainViewController;
+@property (nonatomic, retain) Token *addToken;
+
+- (Token *)tokenFromURL:(NSURL *)url errmsgp:(NSString **)errmsgp;
+- (NSDictionary *)parseURLParams:(NSString *)params;
 
 @end
 

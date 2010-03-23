@@ -25,8 +25,6 @@
 
 #import "Token.h"
 #import "MainViewController.h"
-#import "NSString+Hex.h"
-#import "NSData+Hex.h"
 
 @interface EditTokenViewController : UIViewController {
     Token *token;
@@ -66,10 +64,8 @@
 @property (nonatomic, retain) IBOutlet UISwitch *displayHex;
 @property (nonatomic, retain) IBOutlet UISwitch *lockDown;
 
-- (IBAction)typeChanged;
 - (IBAction)generateRandomKey;
 - (IBAction)stuffChanged:(id)sender;
-- (BOOL)validate:(BOOL *)resetp;
 - (IBAction)cancelEdit:(id)sender;
 - (IBAction)commitEdit:(id)sender;
 - (void)updateHiddenStuff;
