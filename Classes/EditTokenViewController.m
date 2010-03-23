@@ -41,6 +41,8 @@
 @synthesize numDigits;
 @synthesize displayHex;
 @synthesize lockDown;
+@synthesize needShift;
+@synthesize shifted;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,14 +57,49 @@
 }
 
 // Invoked when "Event Based" vs. "Time Based" switch is pressed
-- (IBAction)typeChanged {
+- (IBAction)typeChanged:(id)sender{
     self.token.timeBased = self.eventTimeSwitch.selectedSegmentIndex == 1;
     [self animateHiddenStuff];
 }
 
+// Invoked when interval, counter, or numDigits field is edited to slide up
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    self.needShift = YES;
+    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateShift:) userInfo:nil repeats:NO];
+}
+
+// Invoked when interval, counter, or numDigits field is done editing to slide back down
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    self.needShift = NO;
+    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateShift:) userInfo:nil repeats:NO];
+}
+
+- (void)updateShift:(NSTimer *)timer
+{
+    [self shiftViewForKeyboard:self.needShift];
+}
+
+- (void)shiftViewForKeyboard:(BOOL)up
+{
+    const int movementDistance = 216;
+    const float movementDuration = 0.3f;
+
+    if (self.shifted == up)
+        return;
+    int movement = (up ? -movementDistance : movementDistance);
+    
+    [UIView beginAnimations:@"Shift" context:nil];
+    [UIView setAnimationDuration:movementDuration];
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    [UIView commitAnimations];
+    self.shifted = up;
+}
+
 - (void)animateHiddenStuff {
 	[UIView beginAnimations:@"Foo" context:nil];
-	[UIView setAnimationDuration:1.0];
+	[UIView setAnimationDuration:0.250];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     [self updateHiddenStuff];
     [UIView commitAnimations];  
@@ -82,11 +119,13 @@
 }
 
 - (void)updateHiddenStuff {
-    self.counterLabel.hidden = self.token.timeBased;
-    self.counter.hidden = self.token.timeBased;
-    self.intervalLabel1.hidden = !self.token.timeBased;
-    self.intervalLabel2.hidden = !self.token.timeBased;
-    self.interval.hidden = !self.token.timeBased;
+    double timeBasedAlpha = self.token.timeBased ? 1.0 : 0.0;
+    double eventBasedAlpha = self.token.timeBased ? 0.0 : 1.0;
+    self.counterLabel.alpha = eventBasedAlpha;
+    self.counter.alpha = eventBasedAlpha;
+    self.intervalLabel1.alpha = timeBasedAlpha;
+    self.intervalLabel2.alpha = timeBasedAlpha;
+    self.interval.alpha = timeBasedAlpha;
 }
 
 - (IBAction)generateRandomKey {

@@ -26,7 +26,7 @@
 #import "Token.h"
 #import "MainViewController.h"
 
-@interface EditTokenViewController : UIViewController {
+@interface EditTokenViewController : UIViewController <UITextFieldDelegate> {
     Token *token;
     Token *originalToken;
     int tokenIndex;
@@ -44,6 +44,8 @@
     UITextField *numDigits;
     UISwitch *displayHex;
     UISwitch *lockDown;
+    BOOL needShift;
+    BOOL shifted;
 }
 
 @property (nonatomic, retain) Token *token;
@@ -63,11 +65,15 @@
 @property (nonatomic, retain) IBOutlet UITextField *numDigits;
 @property (nonatomic, retain) IBOutlet UISwitch *displayHex;
 @property (nonatomic, retain) IBOutlet UISwitch *lockDown;
+@property (nonatomic) BOOL needShift;
+@property (nonatomic) BOOL shifted;
 
 - (IBAction)generateRandomKey;
 - (IBAction)stuffChanged:(id)sender;
 - (IBAction)cancelEdit:(id)sender;
 - (IBAction)commitEdit:(id)sender;
+- (IBAction)typeChanged:(id)sender;
+- (void)shiftViewForKeyboard:(BOOL)up;
 - (void)updateHiddenStuff;
 - (void)animateHiddenStuff;
 - (void)updateDisplayFromToken;
