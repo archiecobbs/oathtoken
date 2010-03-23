@@ -82,7 +82,7 @@
 						<bool key="IBUICanCancelContentTouches">NO</bool>
 						<bool key="IBUIBouncesZoom">NO</bool>
 						<bool key="IBUIEditable">NO</bool>
-						<string key="IBUIText">OATH Token is a free and open-source RFC 4226 (HOTP/OATH) compatible token for two-factor authentication. OATH Token is not tied to any proprietary server software. OATH Token supports web-based provisioning and full configurability. Tokens may also be permanently "locked down".</string>
+						<string key="IBUIText">OATH Token is a free and open-source software token for two-factor authentication. OATH Token is compatible with RFC 4226 (HOTP/OATH) and is not tied to any proprietary server software. OATH Token supports web-based provisioning and full configurability. Tokens may also be permanently "locked down".</string>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIAutocapitalizationType">2</int>
 						</object>
@@ -291,7 +291,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">12</int>
+			<int key="maxID">13</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
