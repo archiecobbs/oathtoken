@@ -22,7 +22,7 @@
 	<key>CFBundleIconFile</key>
 	<string>OATH_Token.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.googlecode.oathtoken</string>
+	<string>org.dellroad.oathtoken</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
