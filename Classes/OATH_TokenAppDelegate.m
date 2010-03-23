@@ -26,11 +26,11 @@
 @implementation OATH_TokenAppDelegate
 
 @synthesize window;
-@synthesize mainViewController;
+@synthesize navController;
 @synthesize addToken;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-    [self.window addSubview:[self.mainViewController view]];
+    [self.window addSubview:[self.navController view]];
     [self.window makeKeyAndVisible];
 }
 
@@ -62,7 +62,7 @@
     if (self.addToken == nil)
         return;
     if (buttonIndex != alertView.cancelButtonIndex)
-        [self.mainViewController finishedEditing:self.addToken tokenIndex:-1 commit:YES reset:YES];
+        [(MainViewController *)self.navController.topViewController finishedEditing:self.addToken tokenIndex:-1 commit:YES reset:YES];
     self.addToken = nil;
 }
 
@@ -136,7 +136,7 @@
 
 - (void)dealloc {
     [self.addToken release];
-    [self.mainViewController release];
+    [self.navController release];
     [self.window release];
     [super dealloc];
 }

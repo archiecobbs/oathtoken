@@ -54,7 +54,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Tokens";
     [MainViewController prettyUpButton:self.generateButton];
 	UIBarButtonItem *addButton = [[[UIBarButtonItem alloc] initWithTitle:@"New"
 																   style:UIBarButtonItemStyleBordered
@@ -253,7 +252,7 @@
         }
     }
     [self updatePasswordDisplay];
-    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
     if ([self currentToken] != nil)
         [self startUpdates];
 }
@@ -321,7 +320,7 @@
     edit.token = [[[self.tokens objectAtIndex:row] copy] autorelease];
     edit.tokenIndex = row;
     edit.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentModalViewController:edit animated:YES];
+    [self.navigationController pushViewController:edit animated:YES];
 }
 
 // Invokded when the "Add" nav bar button is pressed
@@ -332,7 +331,7 @@
     add.token = [Token createEmpty];
     add.tokenIndex = -1;
     add.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self presentModalViewController:add animated:YES];
+    [self.navigationController pushViewController:add animated:YES];
     [add.name becomeFirstResponder];
 }
 

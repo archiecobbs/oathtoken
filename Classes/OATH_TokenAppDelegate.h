@@ -27,12 +27,12 @@
 
 @interface OATH_TokenAppDelegate : NSObject <UIApplicationDelegate, UIAlertViewDelegate> {
     UIWindow *window;
-    MainViewController *mainViewController;
+    UINavigationController *navController;
     Token *addToken;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet MainViewController *mainViewController;
+@property (nonatomic, retain) IBOutlet UINavigationController *navController;
 @property (nonatomic, retain) Token *addToken;
 
 - (Token *)tokenFromURL:(NSURL *)url errmsgp:(NSString **)errmsgp;

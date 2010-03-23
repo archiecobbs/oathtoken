@@ -31,7 +31,6 @@
     Token *originalToken;
     int tokenIndex;
     MainViewController *mainViewController;
-    UINavigationItem *navItem;
     UITextField *name;
     UITextField *key;
     UIButton *generateKeyButton;
@@ -52,7 +51,6 @@
 @property (nonatomic, retain) Token *originalToken;
 @property (nonatomic) int tokenIndex;
 @property (nonatomic, retain) MainViewController *mainViewController;
-@property (nonatomic, retain) IBOutlet UINavigationItem *navItem;
 @property (nonatomic, retain) IBOutlet UITextField *name;
 @property (nonatomic, retain) IBOutlet UITextField *key;
 @property (nonatomic, retain) IBOutlet UIButton *generateKeyButton;

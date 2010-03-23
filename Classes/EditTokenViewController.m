@@ -27,7 +27,6 @@
 @synthesize token;
 @synthesize originalToken;
 @synthesize mainViewController;
-@synthesize navItem;
 @synthesize tokenIndex;
 @synthesize name;
 @synthesize key;
@@ -47,11 +46,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [MainViewController prettyUpButton:self.generateKeyButton];
-    UIBarButtonItem *cancelButton = [[[UIBarButtonItem alloc] initWithTitle:@"Cancel"
-																   style:UIBarButtonItemStyleBordered
-																  target:self
-																  action:@selector(cancelEdit:)] autorelease];    
-	self.navigationItem.rightBarButtonItem = cancelButton;
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+                                                                      style:UIBarButtonItemStyleBordered
+                                                                     target:self
+                                                                     action:@selector(cancelEdit:)];    
+	self.navigationItem.leftBarButtonItem = cancelButton;
+    [cancelButton release];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                      style:UIBarButtonItemStyleDone
+                                                                     target:self
+                                                                     action:@selector(commitEdit:)];    
+	self.navigationItem.rightBarButtonItem = doneButton;
+    [doneButton release];
     self.originalToken = [[self.token copy] autorelease];
     [self updateDisplayFromToken];
 }
@@ -106,7 +112,7 @@
 }
 
 - (void)updateDisplayFromToken {
-    self.navItem.title = self.tokenIndex == -1 ? @"New Token" : @"Edit Token";
+    self.navigationItem.title = self.tokenIndex == -1 ? @"New Token" : @"Edit Token";
     self.name.text = self.token.name;
     self.key.text = [self.token.key toHexString];
     self.eventTimeSwitch.selectedSegmentIndex = self.token.timeBased ? 1 : 0;
@@ -180,7 +186,6 @@
 
 - (void)viewDidUnload {
     self.originalToken = nil;
-    self.navItem = nil;
     self.name = nil;
     self.key = nil;
     self.eventTimeSwitch = nil;
@@ -195,7 +200,6 @@
     [token release];
     [originalToken release];
     [mainViewController release];
-    [navItem release];
     [name release];
     [key release];
     [eventTimeSwitch release];
