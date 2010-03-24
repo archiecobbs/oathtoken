@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- $Id$ -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+
+<svg xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 400" width="400" height="400" overflow="visible" preserveAspectRatio="none">
+
+    <defs>
+
+        <linearGradient id="backgroundGradient" gradientUnits="userSpaceOnUse" x1="-50" y1="150" x2="450" y2="250">
+            <stop offset="0%" style="stop-color:#bbccdd" />
+            <stop offset="50%" style="stop-color:#7788aa" />
+            <stop offset="100%" style="stop-color:#222222" />            
+        </linearGradient>
+
+        <filter id="shadow">
+
+            <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+            <feOffset dx="-5" dy="5" />
+            <feComponentTransfer result="shadow">
+                <feFuncA type="linear" slope=".57" />
+            </feComponentTransfer>
+
+            <feFlood flood-color="white"/>
+            <feComposite operator="in" in2="SourceAlpha"/>
+            <feOffset dx="1" dy="-1" result="whiteTrim"/>
+
+            <feFlood flood-color="black" flood-opacity=".4"/>
+            <feComposite operator="in" in2="SourceAlpha"/>
+            <feOffset dx="-1" dy="1" result="blackTrim"/>
+
+            <feMerge>
+                <feMergeNode in="shadow" />
+                <!-- <feMergeNode in="whiteTrim"/> -->
+                <feMergeNode in="blackTrim"/>
+            </feMerge>
+
+            <feComposite operator="out" in2="SourceAlpha"/>
+        </filter>
+
+    </defs>
+
+    <rect style="fill:url(#backgroundGradient)" x="-2" y="-2" width="404" height="404"/>
+
+    <text filter="url(#shadow)" font-family="'Arial Rounded MT Bold'" font-style="italic" stroke-width="2" stroke="black" fill="black" text-anchor="middle" font-weight="bold" x="200">
+        <tspan font-size="130" x="190" y="160">OATH</tspan>
+        <tspan font-size="125" x="190" y="300">Token</tspan>
+    </text>
+
+    <text font-family="'Arial Rounded MT Bold'" font-style="italic" stroke-width="2" stroke="#222222" fill="#eecc33" text-anchor="middle" font-weight="bold" x="200">
+        <tspan font-size="130" x="190" y="160">OATH</tspan>
+        <tspan font-size="125" x="190" y="300">Token</tspan>
+    </text>
+
+</svg>

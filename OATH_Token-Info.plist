@@ -20,7 +20,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>OATH_Token.png</string>
+	<string>OATH_Token57.png</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.dellroad.oathtoken</string>
 	<key>CFBundleInfoDictionaryVersion</key>
