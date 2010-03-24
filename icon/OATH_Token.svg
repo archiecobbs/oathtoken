@@ -8,16 +8,16 @@
 
     <defs>
 
-        <linearGradient id="backgroundGradient" gradientUnits="userSpaceOnUse" x1="-50" y1="150" x2="450" y2="250">
+        <linearGradient id="backgroundGradient" gradientUnits="userSpaceOnUse" x1="-150" y1="150" x2="550" y2="250">
             <stop offset="0%" style="stop-color:#bbccdd" />
             <stop offset="50%" style="stop-color:#7788aa" />
-            <stop offset="100%" style="stop-color:#222222" />            
+            <stop offset="100%" style="stop-color:#171b22" />            
         </linearGradient>
 
         <filter id="shadow">
 
             <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
-            <feOffset dx="-5" dy="5" />
+            <feOffset dx="10" dy="10" />
             <feComponentTransfer result="shadow">
                 <feFuncA type="linear" slope=".57" />
             </feComponentTransfer>
@@ -39,18 +39,21 @@
             <feComposite operator="out" in2="SourceAlpha"/>
         </filter>
 
+        <g id="key" transform="translate(55,250) rotate(-30) scale(1.2, 1.0)">
+            <g transform="translate(-30, -200)">
+                <path fill-rule="evenodd" fill="#eecc33" d="M120,160 A60,90 0 1 0 120,240 L140,240 L160,220 L180,240 L200,220 L220,240
+                    L240,220 L260,240 L280,220 L300,240 L320,220 L340,200 L320,170 L140,170 z
+                    M30,200.01 A18,22 0 1 0 30,200
+                    z"/>
+                <path stroke="#777777" stroke-width="9" stroke-linecap="round" d="M135,190 L315,190"/>
+            </g>
+        </g>
+
     </defs>
 
     <rect style="fill:url(#backgroundGradient)" x="-2" y="-2" width="404" height="404"/>
 
-    <text filter="url(#shadow)" font-family="'Arial Rounded MT Bold'" font-style="italic" stroke-width="2" stroke="black" fill="black" text-anchor="middle" font-weight="bold" x="200">
-        <tspan font-size="130" x="190" y="160">OATH</tspan>
-        <tspan font-size="125" x="190" y="300">Token</tspan>
-    </text>
-
-    <text font-family="'Arial Rounded MT Bold'" font-style="italic" stroke-width="2" stroke="#222222" fill="#eecc33" text-anchor="middle" font-weight="bold" x="200">
-        <tspan font-size="130" x="190" y="160">OATH</tspan>
-        <tspan font-size="125" x="190" y="300">Token</tspan>
-    </text>
+    <use filter="url(#shadow)" xlink:href="#key"/>
+    <use xlink:href="#key"/>
 
 </svg>

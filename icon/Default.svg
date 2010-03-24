@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- $Id$ -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 320 480" width="320" height="480" overflow="visible" preserveAspectRatio="none">
+
+    <image x="0" y="0" width="320" height="480" xlink:href="blank.png"/>
+
+    <text font-family="'Helvetica'" fill="#777777" font-size="20" text-anchor="middle" x="60" y="455">Loading...</text>
+
+</svg>
