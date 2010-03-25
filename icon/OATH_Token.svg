@@ -8,7 +8,7 @@
 
     <defs>
 
-        <linearGradient id="backgroundGradient" gradientUnits="userSpaceOnUse" x1="-150" y1="150" x2="550" y2="250">
+        <linearGradient id="backgroundGradient" gradientUnits="userSpaceOnUse" x1="200" y1="-100" x2="200" y2="500">
             <stop offset="0%" style="stop-color:#bbccdd" />
             <stop offset="50%" style="stop-color:#7788aa" />
             <stop offset="100%" style="stop-color:#171b22" />            
@@ -17,18 +17,18 @@
         <filter id="shadow">
 
             <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
-            <feOffset dx="10" dy="10" />
+            <feOffset dx="0" dy="15" />
             <feComponentTransfer result="shadow">
                 <feFuncA type="linear" slope=".57" />
             </feComponentTransfer>
 
             <feFlood flood-color="white"/>
             <feComposite operator="in" in2="SourceAlpha"/>
-            <feOffset dx="1" dy="-1" result="whiteTrim"/>
+            <feOffset dx="0" dy="-1" result="whiteTrim"/>
 
-            <feFlood flood-color="black" flood-opacity=".4"/>
+            <feFlood flood-color="#4f4411" flood-opacity="1"/>
             <feComposite operator="in" in2="SourceAlpha"/>
-            <feOffset dx="-1" dy="1" result="blackTrim"/>
+            <feOffset dx="1" dy="3" result="blackTrim"/>
 
             <feMerge>
                 <feMergeNode in="shadow" />
@@ -45,13 +45,14 @@
                     L240,220 L260,240 L280,220 L300,240 L320,220 L340,200 L320,170 L140,170 z
                     M30,200.01 A18,22 0 1 0 30,200
                     z"/>
-                <path stroke="#777777" stroke-width="9" stroke-linecap="round" d="M135,190 L315,190"/>
+                <path stroke="#776619" stroke-width="9" stroke-linecap="round" d="M138,193 L318,193"/>
             </g>
         </g>
 
     </defs>
 
-    <rect style="fill:url(#backgroundGradient)" x="-2" y="-2" width="404" height="404"/>
+    <!-- <rect fill="#7788aa" x="-2" y="-2" width="404" height="404"/> -->
+    <rect fill="url(#backgroundGradient)" x="-2" y="-2" width="404" height="404"/>
 
     <use filter="url(#shadow)" xlink:href="#key"/>
     <use xlink:href="#key"/>
