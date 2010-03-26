@@ -27,7 +27,6 @@
 		21CEABE0115188D400508BF2 /* whiteButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 21CEABDA115188D400508BF2 /* whiteButton.png */; };
 		21CEABE61151890400508BF2 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21CEABE51151890400508BF2 /* MainWindow.xib */; };
 		21CEABEA1151896600508BF2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21CEABE91151896600508BF2 /* Security.framework */; };
-		21E036CE115A9D100055050F /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E036CD115A9D100055050F /* Icon-Small.png */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
@@ -60,7 +59,6 @@
 		21CEABDA115188D400508BF2 /* whiteButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = whiteButton.png; path = Classes/whiteButton.png; sourceTree = "<group>"; };
 		21CEABE51151890400508BF2 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		21CEABE91151896600508BF2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		21E036CD115A9D100055050F /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* OATH_Token_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OATH_Token_Prefix.pch; sourceTree = "<group>"; };
@@ -137,7 +135,6 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				21E036CD115A9D100055050F /* Icon-Small.png */,
 				2154AF38115A5DFB004E2E96 /* OATH_Token57.png */,
 				21CEABE51151890400508BF2 /* MainWindow.xib */,
 				21B8371611554E830086D6FA /* InfoView.xib */,
@@ -212,7 +209,6 @@
 				21B8371811554E830086D6FA /* InfoView.xib in Resources */,
 				21763A331159B14A00FEB1DD /* Default.png in Resources */,
 				2154AF39115A5DFB004E2E96 /* OATH_Token57.png in Resources */,
-				21E036CE115A9D100055050F /* Icon-Small.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
