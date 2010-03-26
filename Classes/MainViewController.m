@@ -319,7 +319,6 @@
     edit.mainViewController = self;
     edit.token = [[[self.tokens objectAtIndex:row] copy] autorelease];
     edit.tokenIndex = row;
-    edit.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self.navigationController pushViewController:edit animated:YES];
 }
 
