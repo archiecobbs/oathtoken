@@ -72,14 +72,14 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     self.needShift = YES;
-    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateShift:) userInfo:nil repeats:NO];
+    [self performSelector:@selector(updateShift:) withObject:nil afterDelay:0];
 }
 
 // Invoked when interval, counter, or numDigits field is done editing to slide back down
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     self.needShift = NO;
-    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateShift:) userInfo:nil repeats:NO];
+    [self performSelector:@selector(updateShift:) withObject:nil afterDelay:0];
 }
 
 - (void)updateShift:(NSTimer *)timer
