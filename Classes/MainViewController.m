@@ -55,11 +55,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [MainViewController prettyUpButton:self.generateButton];
-	UIBarButtonItem *addButton = [[[UIBarButtonItem alloc] initWithTitle:@"New"
-																   style:UIBarButtonItemStyleBordered
-																  target:self
-																  action:@selector(addToken:)] autorelease];
+	UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                target:self
+                                                                                action:@selector(addToken:)];
 	self.navigationItem.rightBarButtonItem = addButton;
+    [addButton release];
     NSArray *dirs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *dir = [dirs objectAtIndex:0];
     self.tokenFile = [dir stringByAppendingPathComponent:TOKENS_FILE];
@@ -76,6 +76,7 @@
     self.generateButton = nil;
     self.passwordLabel = nil;
     self.progressBar = nil;
+    [super viewDidUnload];
 }
 
 - (void)dealloc {
@@ -255,11 +256,6 @@
     [self.navigationController popViewControllerAnimated:YES];
     if ([self currentToken] != nil)
         [self startUpdates];
-}
-
-// Invoked when info page "done" button pressed
-- (void)finishedInfo {
-    [self dismissModalViewControllerAnimated:YES];    
 }
      
 #pragma mark UITableViewDataSource methods

@@ -28,15 +28,17 @@
 @synthesize doneButton;
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
     [MainViewController prettyUpButton:self.doneButton];
 }
 
 - (void)viewDidUnload {
     self.doneButton = nil;
+    [super viewDidUnload];
 }
 
 - (IBAction)infoDone:(id)sender {
-    [self.mainViewController finishedInfo];
+    [self dismissModalViewControllerAnimated:YES];    
 }
 
 - (void)dealloc {

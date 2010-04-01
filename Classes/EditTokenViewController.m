@@ -194,6 +194,7 @@
     self.numDigits = nil;
     self.displayHex = nil;
     self.lockDown = nil;
+    [super viewDidUnload];
 }
 
 - (void)dealloc {

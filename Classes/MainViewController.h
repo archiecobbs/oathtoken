@@ -64,7 +64,6 @@
 - (void)updatePasswordDisplay;
 - (void)clearPasswordDisplay;
 - (void)finishedEditing:(Token *)token tokenIndex:(int)tokenIndex commit:(BOOL)commit reset:(BOOL)reset;
-- (void)finishedInfo;
 
 // Actions
 - (IBAction)generatePassword:(id)sender;
