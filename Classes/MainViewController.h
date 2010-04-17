@@ -24,6 +24,7 @@
 @class EditTokenViewController;
 
 #import "Token.h"
+#import "TouchableLabel.h"
 
 @interface MainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
 
@@ -34,7 +35,7 @@
     // Subviews
     UITableView *tokenTable;
     UIButton *generateButton;
-    UILabel *passwordLabel;
+    TouchableLabel *passwordLabel;
     UIProgressView *progressBar;
     
     // Timer

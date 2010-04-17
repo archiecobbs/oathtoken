@@ -13,6 +13,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2154AF39115A5DFB004E2E96 /* OATH_Token57.png in Resources */ = {isa = PBXBuildFile; fileRef = 2154AF38115A5DFB004E2E96 /* OATH_Token57.png */; };
 		21763A331159B14A00FEB1DD /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 21763A321159B14A00FEB1DD /* Default.png */; };
+		2193B236117A56C6001A2487 /* TouchableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2193B235117A56C6001A2487 /* TouchableLabel.m */; };
 		21B8371711554E830086D6FA /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B8371511554E830086D6FA /* InfoViewController.m */; };
 		21B8371811554E830086D6FA /* InfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21B8371611554E830086D6FA /* InfoView.xib */; };
 		21CEABCD1151888E00508BF2 /* EditTokenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CEABC41151888E00508BF2 /* EditTokenViewController.m */; };
@@ -39,6 +40,8 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2154AF38115A5DFB004E2E96 /* OATH_Token57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OATH_Token57.png; path = icon/OATH_Token57.png; sourceTree = "<group>"; };
 		21763A321159B14A00FEB1DD /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		2193B234117A56C6001A2487 /* TouchableLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchableLabel.h; sourceTree = "<group>"; };
+		2193B235117A56C6001A2487 /* TouchableLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchableLabel.m; sourceTree = "<group>"; };
 		21B8371411554E830086D6FA /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoViewController.h; path = ../InfoViewController.h; sourceTree = "<group>"; };
 		21B8371511554E830086D6FA /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoViewController.m; path = ../InfoViewController.m; sourceTree = "<group>"; };
 		21B8371611554E830086D6FA /* InfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoView.xib; sourceTree = "<group>"; };
@@ -101,6 +104,8 @@
 				21CEABCA1151888E00508BF2 /* NSString+Hex.m */,
 				21CEABCB1151888E00508BF2 /* Token.h */,
 				21CEABCC1151888E00508BF2 /* Token.m */,
+				2193B234117A56C6001A2487 /* TouchableLabel.h */,
+				2193B235117A56C6001A2487 /* TouchableLabel.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -232,6 +237,7 @@
 				21CEABD11151888E00508BF2 /* Token.m in Sources */,
 				21CEABDE115188D400508BF2 /* HOTP.m in Sources */,
 				21B8371711554E830086D6FA /* InfoViewController.m in Sources */,
+				2193B236117A56C6001A2487 /* TouchableLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
