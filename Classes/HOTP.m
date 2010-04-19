@@ -60,10 +60,7 @@ static const int powers10[] = { 10, 100, 1000, 10000, 100000, 1000000, 10000000,
     }
     
     /* Compute HMAC */
-    CCHmacContext hmacContext;
-    CCHmacInit(&hmacContext, kCCHmacAlgSHA1, key.bytes, key.length);
-    CCHmacUpdate(&hmacContext, tosign, sizeof(tosign));
-    CCHmacFinal(&hmacContext, hash);
+    CCHmac(kCCHmacAlgSHA1, key.bytes, key.length, tosign, sizeof(tosign), hash);
     
     /* Extract selected bytes to get 32 bit integer value */
     offset = hash[CC_SHA1_DIGEST_LENGTH - 1] & 0x0f;
