@@ -27,6 +27,7 @@
 
 @synthesize window;
 @synthesize navController;
+@synthesize mainController;
 @synthesize addToken;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
@@ -34,6 +35,18 @@
     [self.window makeKeyAndVisible];
 }
 
+- (void)applicationWillResignActive:(UIApplication *)application {
+    [self.mainController stopUpdates];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [self.mainController startUpdates];
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+    [self.mainController stopUpdates];
+}
+    
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     
     // Parse URL into a token
@@ -137,6 +150,7 @@
 - (void)dealloc {
     [self.addToken release];
     [self.navController release];
+    [self.mainController release];
     [self.window release];
     [super dealloc];
 }

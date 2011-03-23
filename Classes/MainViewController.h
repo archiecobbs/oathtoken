@@ -37,25 +37,32 @@
     UIButton *generateButton;
     TouchableLabel *passwordLabel;
     UIProgressView *progressBar;
-    
+
+    // Bar buttons
+    UIBarButtonItem *addButton;
+    UIBarButtonItem *editButton;
+    UIBarButtonItem *doneButton;
+
     // Timer
     NSTimer *timer;
     double lastElapsed;
 }
 
 // Properties
-@property (nonatomic, retain) NSString *tokenFile;
-@property (nonatomic, retain) NSMutableArray *tokens;
+@property (nonatomic, retain, readonly) NSString *tokenFile;
+@property (nonatomic, retain, readonly) NSMutableArray *tokens;
 @property (nonatomic, retain) IBOutlet UITableView *tokenTable;
 @property (nonatomic, retain) IBOutlet UIButton *generateButton;
 @property (nonatomic, retain) IBOutlet UILabel *passwordLabel;
 @property (nonatomic, retain) IBOutlet UIProgressView *progressBar;
+@property (nonatomic, retain) UIBarButtonItem *addButton;
+@property (nonatomic, retain) UIBarButtonItem *editButton;
+@property (nonatomic, retain) UIBarButtonItem *doneButton;
 @property (nonatomic, retain) NSTimer *timer;
 @property (nonatomic) double lastElapsed;
 
 // Methods
 + (void)prettyUpButton:(UIButton *)button;
-- (void)loadTokens;
 - (void)saveTokens;
 - (Token *)currentToken;
 - (void)startUpdates;
@@ -69,6 +76,8 @@
 // Actions
 - (IBAction)generatePassword:(id)sender;
 - (IBAction)addToken:(id)sender;
+- (IBAction)editTokens:(id)sender;
+- (IBAction)doneEditTokens:(id)sender;
 - (IBAction)showInfo:(id)sender;
 
 @end

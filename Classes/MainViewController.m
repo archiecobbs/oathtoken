@@ -27,7 +27,7 @@
 #define TOKENS_FILE                 @"tokens.plist" // file for stored tokens
 #define MAX_EVENT_PASSWORD_DISPLAY  30.0            // display event-based passwords for this long
 #define LABEL_FADE_TIME             0.666           // fade-in/fade-out time
-#define TIMER_INTERVAL              0.050           // animation timer interval
+#define TIMER_INTERVAL              0.025           // animation timer interval
 
 @implementation MainViewController
 
@@ -38,6 +38,9 @@
 @synthesize generateButton;
 @synthesize passwordLabel;
 @synthesize progressBar;
+@synthesize addButton;
+@synthesize editButton;
+@synthesize doneButton;
 @synthesize timer;
 @synthesize lastElapsed;
 
@@ -54,28 +57,71 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Initialize
+    if (self.tokens == nil) {
+        
+        // Find tokens file
+        NSString *dir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        tokenFile = [[dir stringByAppendingPathComponent:TOKENS_FILE] retain];
+
+        // Initialize array
+        tokens = [[NSMutableArray arrayWithCapacity:10] retain];
+
+        // Read tokens from the data file (if it exists)
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        if ([fileManager fileExistsAtPath:self.tokenFile]) {
+            NSArray *fileContents = [NSArray arrayWithContentsOfFile:self.tokenFile];
+            for (NSDictionary *dict in fileContents)
+                [self.tokens addObject:[Token createFromDictionary:dict]];
+        }
+        
+        // Auto-select the first token
+        if ([self.tokens count] > 0)
+            [self.tokenTable selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:FALSE scrollPosition:UITableViewScrollPositionTop];
+    }
+    
+    // Fixup button
     [MainViewController prettyUpButton:self.generateButton];
-	UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                                target:self
-                                                                                action:@selector(addToken:)];
-	self.navigationItem.rightBarButtonItem = addButton;
-    [addButton release];
-    NSArray *dirs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *dir = [dirs objectAtIndex:0];
-    self.tokenFile = [dir stringByAppendingPathComponent:TOKENS_FILE];
-    self.tokens = [NSArray array];
-    [self loadTokens];
-    [self updatePasswordDisplay];
+    
+	// Create "+" button
+    self.addButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                    target:self
+                                                                    action:@selector(addToken:)] autorelease];
+	self.navigationItem.rightBarButtonItem = self.addButton;
+    
+    // Create "Edit" button
+    self.editButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                                                     target:self
+                                                                     action:@selector(editTokens:)] autorelease];
+	self.navigationItem.leftBarButtonItem = self.editButton;
+    
+    // Create "Done" button
+    self.doneButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                     target:self
+                                                                     action:@selector(doneEditTokens:)] autorelease];
+    
+    // Update display
+    [self updatePasswordDisplay];    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self startUpdates];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self stopUpdates];
 }
 
 - (void)viewDidUnload {
     [self stopUpdates];
-    self.tokenFile = nil;
-    self.tokens = nil;
     self.tokenTable = nil;
     self.generateButton = nil;
     self.passwordLabel = nil;
     self.progressBar = nil;
+    self.addButton = nil;
+    self.editButton = nil;
+    self.doneButton = nil;
     [super viewDidUnload];
 }
 
@@ -87,6 +133,9 @@
     [generateButton release];
     [passwordLabel release];
     [progressBar release];
+    [addButton release];
+    [editButton release];
+    [doneButton release];
     [super dealloc];
 }
 
@@ -108,11 +157,39 @@
     [self startUpdates];
 }
 
+// Invoked when the info icon is pressed
 - (IBAction)showInfo:(id)sender {
     InfoViewController *info = [[[InfoViewController alloc] initWithNibName:@"InfoView" bundle:nil] autorelease];
     info.mainViewController = self;
     info.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self presentModalViewController:info animated:YES];    
+}
+
+// Invoked when the "+" nav bar button is pressed
+- (IBAction)addToken:(id)sender {
+    [self doneEditTokens:sender];
+    [self stopUpdates];
+    EditTokenViewController *add = [[[EditTokenViewController alloc] initWithNibName:@"EditTokenView" bundle:nil] autorelease];
+    add.mainViewController = self;
+    add.token = [Token createEmpty];
+    add.tokenIndex = -1;
+    add.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self.navigationController pushViewController:add animated:YES];
+    [add.name becomeFirstResponder];
+}
+
+// Invoked when the "Edit" nav bar button is pressed
+- (IBAction)editTokens:(id)sender {
+    [self stopUpdates];
+    [self clearPasswordDisplay];
+    [self.tokenTable setEditing:TRUE animated:TRUE];
+    self.navigationItem.leftBarButtonItem = self.doneButton;
+}
+
+// Invoked when the "Done" nav bar button is pressed
+- (IBAction)doneEditTokens:(id)sender {
+    [self.tokenTable setEditing:FALSE animated:TRUE];
+    self.navigationItem.leftBarButtonItem = self.editButton;
 }
 
 #pragma mark Helper methods
@@ -128,25 +205,9 @@
     return [self.tokens objectAtIndex:row];
 }
 
-// Reload tokens from the data file
-- (void)loadTokens {
-    
-    // Find data file
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath:self.tokenFile]) {
-        self.tokens = [NSMutableArray array];
-        return;
-    }
-    
-    // Read file
-    NSArray *fileContents = [NSArray arrayWithContentsOfFile:self.tokenFile];
-    self.tokens = [NSMutableArray arrayWithCapacity:[fileContents count]];
-    for (NSDictionary *dict in fileContents)
-        [tokens addObject:[Token createFromDictionary:dict]];
-}
-
 // Save tokens to the data file
 - (void)saveTokens {
+    [self.tokens count];
     NSMutableArray *array = [[NSMutableArray alloc] init];
     for (Token *token in self.tokens)
         [array addObject:[token toDictionary]];
@@ -257,6 +318,17 @@
     if ([self currentToken] != nil)
         [self startUpdates];
 }
+
+// Invoked when a row is moved
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+    [self saveTokens];
+    NSUInteger srcIndex = [fromIndexPath row];
+    NSUInteger dstIndex = [toIndexPath row];
+    Token *token = [[[self.tokens objectAtIndex:srcIndex] retain] autorelease];
+    [self.tokens removeObjectAtIndex:srcIndex];
+    [self.tokens insertObject:token atIndex:dstIndex];
+    [self saveTokens];
+}
      
 #pragma mark UITableViewDataSource methods
 
@@ -284,12 +356,16 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
         [self.tokens removeObjectAtIndex:[indexPath row]];
+        [self.tokenTable deleteRowsAtIndexPaths:indexPaths withRowAnimation:TRUE];
         [self saveTokens];
-        [self.tokenTable reloadData];
-        [self clearPasswordDisplay];
-        [self stopUpdates];
     }
+}
+
+// This is here to disable swipe-to-delete
+- (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return self.tokenTable.editing ? UITableViewCellEditingStyleDelete : UITableViewCellEditingStyleNone;
 }
 
 - (void)clearPasswordDisplay {
@@ -316,18 +392,6 @@
     edit.token = [[[self.tokens objectAtIndex:row] copy] autorelease];
     edit.tokenIndex = row;
     [self.navigationController pushViewController:edit animated:YES];
-}
-
-// Invokded when the "Add" nav bar button is pressed
-- (IBAction)addToken:(id)sender {
-    [self stopUpdates];
-    EditTokenViewController *add = [[[EditTokenViewController alloc] initWithNibName:@"EditTokenView" bundle:nil] autorelease];
-    add.mainViewController = self;
-    add.token = [Token createEmpty];
-    add.tokenIndex = -1;
-    add.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self.navigationController pushViewController:add animated:YES];
-    [add.name becomeFirstResponder];
 }
 
 @end
