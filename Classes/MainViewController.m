@@ -218,6 +218,12 @@
                            cancelButtonTitle:@"Too Bad" otherButtonTitles:nil] autorelease] show];
     }
     [array release];
+    
+    // We want the file to be encrypted
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager setAttributes:[NSDictionary dictionaryWithObject:NSFileProtectionComplete forKey:NSFileProtectionKey]
+                  ofItemAtPath:self.tokenFile
+                         error:nil];
 }
 
 // Start update timer
