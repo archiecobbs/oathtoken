@@ -92,8 +92,12 @@
         }
         
         // Auto-select the first token
-        if ([self.tokens count] > 0)
+        if ([self.tokens count] > 0) {
             [self.tokenTable selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:FALSE scrollPosition:UITableViewScrollPositionTop];
+            [self recalculatePassword];
+            [self updatePasswordDisplay];
+            [self startUpdates];
+        }
     }
     
     // Fixup button
