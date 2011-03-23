@@ -55,6 +55,16 @@
     [button setBackgroundImage:stretchPressed forState:UIControlStateHighlighted];    
 }
 
+- (void)ensureTokenFileIsEncrypted {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    id attr = [[fileManager attributesOfItemAtPath:self.tokenFile error:nil] valueForKey:NSFileProtectionKey];
+    if (![NSFileProtectionComplete isEqual:attr]) {
+        [fileManager setAttributes:[NSDictionary dictionaryWithObject:NSFileProtectionComplete forKey:NSFileProtectionKey]
+                      ofItemAtPath:self.tokenFile
+                             error:nil];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -71,9 +81,14 @@
         // Read tokens from the data file (if it exists)
         NSFileManager *fileManager = [NSFileManager defaultManager];
         if ([fileManager fileExistsAtPath:self.tokenFile]) {
+            
+            // Read the file
             NSArray *fileContents = [NSArray arrayWithContentsOfFile:self.tokenFile];
             for (NSDictionary *dict in fileContents)
                 [self.tokens addObject:[Token createFromDictionary:dict]];
+            
+            // Mark it for encryption
+            [self ensureTokenFileIsEncrypted];
         }
         
         // Auto-select the first token
@@ -218,12 +233,7 @@
                            cancelButtonTitle:@"Too Bad" otherButtonTitles:nil] autorelease] show];
     }
     [array release];
-    
-    // We want the file to be encrypted
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    [fileManager setAttributes:[NSDictionary dictionaryWithObject:NSFileProtectionComplete forKey:NSFileProtectionKey]
-                  ofItemAtPath:self.tokenFile
-                         error:nil];
+    [self ensureTokenFileIsEncrypted];
 }
 
 // Start update timer
