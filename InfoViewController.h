@@ -24,10 +24,12 @@
 
 @interface InfoViewController : UIViewController {
     MainViewController *mainViewController;
+    UILabel *versionLabel;
     UIButton *doneButton;
 }
 
 @property (nonatomic, retain) MainViewController *mainViewController;
+@property (nonatomic, retain) IBOutlet UILabel *versionLabel;
 @property (nonatomic, retain) IBOutlet UIButton *doneButton;
 
 - (IBAction)infoDone:(id)sender;

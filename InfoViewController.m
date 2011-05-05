@@ -25,14 +25,20 @@
 @implementation InfoViewController
 
 @synthesize mainViewController;
+@synthesize versionLabel;
 @synthesize doneButton;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [MainViewController prettyUpButton:self.doneButton];
+    NSBundle *bundle = [NSBundle mainBundle];
+    self.versionLabel.text = [NSString stringWithFormat:@"version %@ (r%@)",
+                              [bundle objectForInfoDictionaryKey:@"CFBundleVersion"],
+                              [bundle objectForInfoDictionaryKey:@"SVNRevision"]];
 }
 
 - (void)viewDidUnload {
+    self.versionLabel = nil;
     self.doneButton = nil;
     [super viewDidUnload];
 }
@@ -43,6 +49,8 @@
 
 - (void)dealloc {
     [mainViewController release];
+    [versionLabel release];
+    [doneButton release];
     [super dealloc];
 }
 
