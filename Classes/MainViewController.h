@@ -45,7 +45,7 @@
 
     // Timer
     NSTimer *timer;
-    double lastElapsed;
+    u_long lastSequence;
 }
 
 // Properties
@@ -59,7 +59,7 @@
 @property (nonatomic, retain) UIBarButtonItem *editButton;
 @property (nonatomic, retain) UIBarButtonItem *doneButton;
 @property (nonatomic, retain) NSTimer *timer;
-@property (nonatomic) double lastElapsed;
+@property (nonatomic, assign) u_long lastSequence;
 
 // Methods
 + (void)prettyUpButton:(UIButton *)button;

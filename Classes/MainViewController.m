@@ -42,7 +42,7 @@
 @synthesize editButton;
 @synthesize doneButton;
 @synthesize timer;
-@synthesize lastElapsed;
+@synthesize lastSequence;
 
 #pragma mark UIViewController methods
 
@@ -125,6 +125,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [self updatePasswordDisplay];
     [self startUpdates];
 }
 
@@ -276,9 +277,11 @@
         u_long secs = (u_long)[now timeIntervalSince1970];
         double frac = [now timeIntervalSince1970] - secs;
         elapsed = (double)(secs % token.interval) + frac;
-        if (elapsed < self.lastElapsed)
+        u_long sequence = secs / token.interval;
+        if (sequence != self.lastSequence) {
+            self.lastSequence = sequence;
             [self recalculatePassword];
-        self.lastElapsed = elapsed;
+        }
         self.generateButton.hidden = YES;
     } else if (token.lastEvent != nil) {
         elapsed = [now timeIntervalSinceDate:token.lastEvent];

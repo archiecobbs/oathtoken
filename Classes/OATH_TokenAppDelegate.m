@@ -37,6 +37,7 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     [self.mainController stopUpdates];
+    [self.mainController clearPasswordDisplay];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -45,6 +46,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     [self.mainController stopUpdates];
+    [self.mainController clearPasswordDisplay];
 }
     
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
