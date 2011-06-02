@@ -35,6 +35,7 @@
     // Subviews
     UITableView *tokenTable;
     UIButton *generateButton;
+    UIButton *advanceButton;
     TouchableLabel *passwordLabel;
     UIProgressView *progressBar;
 
@@ -53,6 +54,7 @@
 @property (nonatomic, retain, readonly) NSMutableArray *tokens;
 @property (nonatomic, retain) IBOutlet UITableView *tokenTable;
 @property (nonatomic, retain) IBOutlet UIButton *generateButton;
+@property (nonatomic, retain) IBOutlet UIButton *advanceButton;
 @property (nonatomic, retain) IBOutlet UILabel *passwordLabel;
 @property (nonatomic, retain) IBOutlet UIProgressView *progressBar;
 @property (nonatomic, retain) UIBarButtonItem *addButton;
@@ -75,6 +77,7 @@
 
 // Actions
 - (IBAction)generatePassword:(id)sender;
+- (IBAction)advanceToken:(id)sender;
 - (IBAction)addToken:(id)sender;
 - (IBAction)editTokens:(id)sender;
 - (IBAction)doneEditTokens:(id)sender;

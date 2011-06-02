@@ -36,6 +36,7 @@
 @synthesize tokens;
 @synthesize tokenTable;
 @synthesize generateButton;
+@synthesize advanceButton;
 @synthesize passwordLabel;
 @synthesize progressBar;
 @synthesize addButton;
@@ -137,6 +138,7 @@
     [self stopUpdates];
     self.tokenTable = nil;
     self.generateButton = nil;
+    self.advanceButton = nil;
     self.passwordLabel = nil;
     self.progressBar = nil;
     self.addButton = nil;
@@ -151,6 +153,7 @@
     [tokens release];
     [tokenTable release];
     [generateButton release];
+    [advanceButton release];
     [passwordLabel release];
     [progressBar release];
     [addButton release];
@@ -212,6 +215,13 @@
     self.navigationItem.leftBarButtonItem = self.editButton;
 }
 
+// Invoked when the advance button is pressed
+- (IBAction)advanceToken:(id)sender {
+    Token *token = [self currentToken];
+    token.lastEvent = nil;
+    [self updatePasswordDisplay];
+}
+
 #pragma mark Helper methods
 
 // Get the currently selected token, if any
@@ -265,6 +275,7 @@
     Token *token = [self currentToken];
     if (token == nil) {
         [self clearPasswordDisplay];
+        self.advanceButton.hidden = TRUE;
         return;
     }
     NSDate *now = [NSDate date];
@@ -283,14 +294,17 @@
             [self recalculatePassword];
         }
         self.generateButton.hidden = YES;
+        self.advanceButton.hidden = TRUE;
     } else if (token.lastEvent != nil) {
         elapsed = [now timeIntervalSinceDate:token.lastEvent];
         period = MAX_EVENT_PASSWORD_DISPLAY;
         showIt = elapsed <= period;
         self.generateButton.hidden = showIt;
+        self.advanceButton.hidden = !showIt;
     } else {
         showIt = NO;
         self.generateButton.hidden = NO;
+        self.advanceButton.hidden = TRUE;
     }
 
     // Display password and progress bar as needed
