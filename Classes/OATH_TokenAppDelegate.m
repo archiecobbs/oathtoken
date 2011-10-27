@@ -30,26 +30,52 @@
 @synthesize mainController;
 @synthesize addToken;
 
+///////////// APPLICATION LIFECYCLE EVENTS ////////////////
+
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
+    NSLog(@"Application event: applicationDidFinishLaunching");
     [self.window addSubview:[self.navController view]];
     [self.window makeKeyAndVisible];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
+    NSLog(@"Application event: applicationWillResignActive");
     [self.mainController stopUpdates];
     [self.mainController clearPasswordDisplay];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    NSLog(@"Application event: applicationDidBecomeActive");
     [self.mainController startUpdates];
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application {
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    NSLog(@"Application event: applicationDidEnterBackground");
     [self.mainController stopUpdates];
     [self.mainController clearPasswordDisplay];
 }
-    
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    NSLog(@"Application event: applicationWillEnterForeground");
+    [self.mainController startUpdates];
+}
+
+- (void)applicationProtectedDataWillBecomeUnavailable:(UIApplication *)application {
+    NSLog(@"Application event: applicationProtectedDataWillBecomeUnavailable");
+}
+
+- (void)applicationProtectedDataDidBecomeAvailable:(UIApplication *)application {
+    NSLog(@"Application event: applicationProtectedDataDidBecomeAvailable");
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+    NSLog(@"Application event: applicationWillTerminate");
+    [self.mainController stopUpdates];
+    [self.mainController clearPasswordDisplay];
+}
+
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    NSLog(@"Application event: application handleOpenURL");
     
     // Parse URL into a token
     NSString *errmsg = nil;
