@@ -1,3 +1,5 @@
+**NOTE: This project is not really being maintained any longer. Google Authenticator can be used as a replacement.**
+
 ## Overview
 
 **OATH Token** is a free and open-source software token for two-factor authentication on the iPhone. **OATH Token** implements the RFC 4226 [HOTP/OATH](http://en.wikipedia.org/wiki/HOTP) algorithm standard and is not tied to any proprietary server software.
